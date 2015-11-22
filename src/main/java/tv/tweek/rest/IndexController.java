@@ -16,7 +16,7 @@ import tv.tweek.services.URLMinifierService;
 
 @RestController
 @EnableAutoConfiguration
-public class IndexRest {
+public class IndexController {
 	
 	@Value("${app.url}")
 	private String appDomain;
@@ -25,8 +25,12 @@ public class IndexRest {
 	private URLMinifierService service;
 
 	@RequestMapping(method = RequestMethod.GET, path="/{url}")
-	public String getUrlFrom(@PathVariable String url) {
-		return service.decode(url);
+	public ResponseEntity<String> getUrlFrom(@PathVariable String url) {
+		try{
+			return new ResponseEntity<String>(service.decode(url), HttpStatus.OK);
+		}catch(Exception e){
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
