@@ -21,7 +21,7 @@ public class URLMinifierService {
 		if(!UrlValidator.getInstance().isValid(url)){
 			throw new Exception("URL "+url+" is invalid");
 		}
-		String hash = Hashing.murmur3_32().hashString(url, Charsets.UTF_8).toString().replace("\"", "");
+		String hash = Hashing.murmur3_32().hashString(url, Charsets.UTF_8).toString();
 		template.opsForValue().set(hash, url);
 		return hash;
 	}
