@@ -23,7 +23,7 @@ public class IndexController {
 	
 	@Autowired
 	private URLMinifierService service;
-
+	
 	@RequestMapping(method = RequestMethod.GET, path="/{url}")
 	public ResponseEntity<String> getUrlFrom(@PathVariable String url) {
 		try{
