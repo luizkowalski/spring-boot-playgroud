@@ -10,8 +10,8 @@ public class MessageSender {
 	@Autowired
 	RabbitTemplate rabbitTemplate;
 	
-	public void sendMessage(String message){
-		rabbitTemplate.convertAndSend("tweekQueue", message);
+	public void sendMessage(Queue queue, String message){
+		rabbitTemplate.convertAndSend(queue.getName(), message);
 	}
 
 }

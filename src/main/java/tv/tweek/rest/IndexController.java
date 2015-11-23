@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tv.tweek.model.Test;
 import tv.tweek.sender.MessageSender;
+import tv.tweek.sender.Queue;
 import tv.tweek.services.URLMinifierService;
 
 @RestController
@@ -40,7 +41,7 @@ public class IndexController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<String> createMinifiedUrl(@RequestParam(value="url") String url) {
 		try{
-			sender.sendMessage(url);
+			sender.sendMessage(Queue.TWEEK, url);
 			return new ResponseEntity<String>(appDomain + service.minify(url), HttpStatus.OK);
 		} catch(Exception e){
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
